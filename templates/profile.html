@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Your Profile</h1>
+        <a href="/" class="btn btn-secondary">Home</a>
+        <a href="/user/editprofile" class="btn btn-primary">Edit Profile</a><br><br>
+
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>First Name</th>
+                    <td>{{.FirstName}}</td>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <td>{{.LastName}}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{.Email}}</td>
+                </tr>
+                <tr>
+                    <th>Phone Number</th>
+                    <td>{{.PhoneNumber}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/user/userchangepassword" class="btn btn-danger">Change Password</a>
+        <a href="/user/showaddresses" class="btn btn-primary">Show Addresses</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+        <a class="navbar-brand" href="/">Go Shoppy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/adminpanel">AdminPanel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/user/viewuser">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/order_management">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-3 pt-4">
+        <div class="row mt-5">
+            <div class="col-sm-8">
+                <h1>Products</h1>
+                <h5>Search Products</h5>
+                <form action="/admin/searchproducts" method="get" class="mb-3" style="width: max-content;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Product Name" required>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-success">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+                <a href="/admin/viewproducts" class="btn btn-primary">Show all Products</a>
+                {{if .Products}}
+                    <table class="table table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Product Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Brand</th>
+                                <th>Category</th>
+                                <th>Image</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{range .Products}}
+                                <tr>
+                                    <td>{{.ID}}</td>
+                                    <td>{{.ProductName}}</td>
+                                    <td>{{.Description}}</td>
+                                    <td>{{.Price}}</td>
+                                    <td>{{.Stock}}</td>
+                                    <td>{{.Brand.BrandName}}</td>
+                                    <td>{{.Category.CategoryName}}</td>
+                                    <td><img src="/public/images/{{.Image.Image}}" alt="{{.ProductName}}" style="width: 100px; height: 120px;"></td>
+                                    <td><a href="/admin/editproduct/{{.ID}}" class="btn btn-sm btn-warning">Edit</a></td>
+                                </tr>
+                            {{end}}
+                        </tbody>
+                    </table>
+                {{else}}
+                    <p>No products available</p>
+                {{end}}
+            </div>
+            <div class="col-sm-4">
+                <div class="card p-3">
+                    <h2>Add New Product</h2>
+                    <form action="/admin/addproduct" method="post" enctype="multipart/form-data" class="mb-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="description" name="description" placeholder="Description" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="price" name="price" placeholder="Price" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="stock" name="stock" placeholder="Stock" required>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="brand_id" name="brand_id" required>
+                                <option value="" disabled selected>Choose Brand</option>
+                                {{range .Brands}}
+                                    <option value="{{.ID}}">{{.BrandName}}</option>
+                                {{end}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="category_id" name="category_id" required>
+                                <option value="" disabled selected>Choose Category</option>
+                                {{range .Categories}}
+                                    <option value="{{.ID}}">{{.CategoryName}}</option>
+                                {{end}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" class="form-control" id="image" name="image" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Product</button>
+                    </form>
+
+                    <a class="btn btn-warning my-2" href="/admin/brand">View Brands</a><br><br>
+
+                    <h2>Add New Category</h2>
+                    <form action="/admin/addcategories" method="post" class="mb-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Category Name" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Category</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

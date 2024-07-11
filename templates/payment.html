@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Payment Options</h1>
+        <form action="/user/payment/cashondelivery" method="get">
+            <button type="submit" class="btn btn-primary">Cash on Delivery</button>
+        </form><br>
+        <form action="/user/payment/razorpay" method="get">
+            <button type="submit" class="btn btn-primary">Razorpay</button>
+        </form>
+    </div>
+</body>
+</html>

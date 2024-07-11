@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+        <a class="navbar-brand" href="/">Go Shoppy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/user/viewuser">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/viewproducts">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/order_management">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="mt-5">Admin Panel</h1><br>
+        <form class="form-inline my-4 justify-content" action="/admin/salesreport" method="GET">
+            <div class="form-group mx-2">
+                <label for="startDate" class="mr-2">Start Date:</label>
+                <input type="text" class="form-control" id="startDate" name="startDate" placeholder="DD-MM-YYYY" required>
+            </div>
+            <div class="form-group mx-2">
+                <label for="endDate" class="mr-2">End Date:</label>
+                <input type="text" class="form-control" id="endDate" name="endDate" placeholder="DD-MM-YYYY" required>
+            </div>
+            <button type="submit" class="btn btn-success mx-2">Generate Sales Report</button>
+        </form>
+        <a class="btn btn-primary my-2 mr-2 my-sm-1" href="/admin/profile">Admin Profile</a>
+        <a class="btn btn-primary my-2 mr-2 my-sm-1" href="/admin/user/viewuser">User Management</a>
+        <a class="btn btn-primary my-2 mr-2 my-sm-1" href="/admin/viewproducts">Product Management</a>
+        <a class="btn btn-primary my-2 mr-2 my-sm-1" href="/admin/order_management">Order Management</a>
+        <a class="btn btn-primary my-2 mr-2 my-sm-1" href="/admin/logout">Admin Logout</a>
+        
+    </div>
+    <script>
+        $(function() {
+            $("#startDate").datepicker({ dateFormat: "dd-mm-yy" });
+            $("#endDate").datepicker({ dateFormat: "dd-mm-yy" });
+        });
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

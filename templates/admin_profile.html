@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Go Shoppy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/adminpanel">AdminPanel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/user/viewuser">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/viewproducts">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/order_management">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5 card" style="width: 25rem;">
+        <h1>Admin Profile</h1>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>First Name</th>
+                    <td>{{.FirstName}}</td>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <td>{{.LastName}}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{.Email}}</td>
+                </tr>
+                <tr>
+                    <th>Phone Number</th>
+                    <td>{{.PhoneNumber}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/admin/adminpanel" class="btn btn-secondary mb-3">Back to Admin Panel</a>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

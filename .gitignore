@@ -1,0 +1,16 @@
+# Go build and test files
+*.exe
+*_test.go
+*.test
+
+# tmp files
+tmp/
+
+# Config files
+*.env
+
+# DB File
+schema.sql
+
+# Public folder (if you're serving static files)
+public/

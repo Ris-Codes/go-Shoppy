@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5 card" style="width: 25rem;">
+        <h1>Edit Product</h1>
+        <form action="/admin/editproduct/{{.Product.ID}}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="product_name">Product Name</label>
+                <input type="text" class="form-control" id="product_name" name="product_name" value="{{.Product.ProductName}}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" name="description" value="{{.Product.Description}}" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" name="price" value="{{.Product.Price}}" required>
+            </div>
+            <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type="number" class="form-control" id="stock" name="stock" value="{{.Product.Stock}}" required>
+            </div>
+            <div class="form-group">
+                <label for="brand_id">Brand</label>
+                <select class="form-control" id="brand_id" name="brand_id" required>
+                    {{range .Brands}}
+                        <option value="{{.ID}}" {{if eq .ID $.Product.BrandId}}selected{{end}}>{{.BrandName}}</option>
+                    {{end}}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="category_id">Category</label>
+                <select class="form-control" id="category_id" name="category_id" required>
+                    {{range .Categories}}
+                        <option value="{{.ID}}" {{if eq .ID $.Product.CategoryId}}selected{{end}}>{{.CategoryName}}</option>
+                    {{end}}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+        <a href="/admin/viewproducts" class="btn btn-secondary mt-3 mb-3">Back to Products</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

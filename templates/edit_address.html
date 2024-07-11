@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Address</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5 mb-3 card" style="width: 30rem;">
+        <h1>Edit Address</h1>
+        <form action="/user/editaddress/{{.Address.Addressid}}" method="POST">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{.Address.Name}}" required>
+            </div>
+            <div class="form-group">
+                <label for="phoneno">Phone Number</label>
+                <input type="text" class="form-control" id="phoneno" name="phoneno" value="{{.Address.Phoneno}}" required>
+            </div>
+            <div class="form-group">
+                <label for="houseno">House Number</label>
+                <input type="text" class="form-control" id="houseno" name="houseno" value="{{.Address.Houseno}}" required>
+            </div>
+            <div class="form-group">
+                <label for="area">Area</label>
+                <input type="text" class="form-control" id="area" name="area" value="{{.Address.Area}}" required>
+            </div>
+            <div class="form-group">
+                <label for="landmark">Landmark</label>
+                <input type="text" class="form-control" id="landmark" name="landmark" value="{{.Address.Landmark}}" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" name="city" value="{{.Address.City}}" required>
+            </div>
+            <div class="form-group">
+                <label for="pincode">Pincode</label>
+                <input type="text" class="form-control" id="pincode" name="pincode" value="{{.Address.Pincode}}" required>
+            </div>
+            <div class="form-group">
+                <label for="district">District</label>
+                <input type="text" class="form-control" id="district" name="district" value="{{.Address.District}}" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" class="form-control" id="state" name="state" value="{{.Address.State}}" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" class="form-control" id="country" name="country" value="{{.Address.Country}}" required>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Update Address</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

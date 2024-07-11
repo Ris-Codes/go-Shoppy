@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+        <a class="navbar-brand" href="/">Go Shoppy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/adminpanel">AdminPanel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/viewproducts">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/order_management">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="mt-5">User Management</h1>
+
+         <!-- Search Form -->
+         <form class="form-inline my-4" method="GET" action="/admin/user/searchuser">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search by User ID" name="userid" aria-label="Search" required>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+        <!-- Display Search Result -->
+        {{if .SearchResult}}
+        <h3>Search Result:</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{.SearchResult.ID}}</td>
+                    <td>{{.SearchResult.FirstName}}</td>
+                    <td>{{.SearchResult.LastName}}</td>
+                    <td>{{.SearchResult.Email}}</td>
+                    <td>{{.SearchResult.PhoneNumber}}</td>
+                    <td>{{if .SearchResult.Isblocked}}Blocked{{else}}Active{{end}}</td>
+                    <td>
+                        <form method="POST" action="/admin/user/blockuser">
+                            <input type="hidden" name="userid" value="{{.SearchResult.ID}}">
+                            <button type="submit" class="btn btn-{{if .SearchResult.Isblocked}}danger{{else}}success{{end}}">
+                                {{if .SearchResult.Isblocked}}Unblock{{else}}Block{{end}}
+                            </button>
+                        </form><br>
+                        <a href="/admin/user/getuserprofile?userId={{.SearchResult.ID}}" class="btn btn-info">Profile</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/admin/user/viewuser" class="btn btn-secondary">Back to User List</a>
+        {{else}}
+        <!-- User Data Table -->
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .UserData}}
+                <tr>
+                    <td>{{.ID}}</td>
+                    <td>{{.FirstName}}</td>
+                    <td>{{.LastName}}</td>
+                    <td>{{.Email}}</td>
+                    <td>{{.PhoneNumber}}</td>
+                    <td>{{if .Isblocked}}Blocked{{else}}Active{{end}}</td>
+                    <td>
+                        <form method="POST" action="/admin/user/blockuser">
+                            <input type="hidden" name="userid" value="{{.ID}}">
+                            <button type="submit" class="btn btn-{{if .Isblocked}}danger{{else}}success{{end}}">
+                                {{if .Isblocked}}Unblock{{else}}Block{{end}}
+                            </button>
+                        </form>
+                        <br>
+                        <a href="/admin/user/getuserprofile?userId={{.ID}}" class="btn btn-info">Profile</a>
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+        {{end}}
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

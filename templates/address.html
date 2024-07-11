@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Addresses</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5 mb-5 card" style="width: max-content;">
+        <h1 style="text-align: center;">Your Addresses</h1>
+        <a href="/user/viewprofile" class="btn btn-primary" style="width: fit-content;">Back</a><br><br>
+        {{if .HasAddresses}}
+        <div class="row">
+            {{range .Addresses}}
+            <div class="col-md-6 mb-4">
+                <div class="card" style="width: 440px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{.Name}}</h5>
+                        <p class="card-text"><strong>Phone:</strong> {{.Phoneno}}</p>
+                        <p class="card-text"><strong>House No:</strong> {{.Houseno}}</p>
+                        <p class="card-text"><strong>Area:</strong> {{.Area}}</p>
+                        <p class="card-text"><strong>Landmark:</strong> {{.Landmark}}</p>
+                        <p class="card-text"><strong>City:</strong> {{.City}}</p>
+                        <p class="card-text"><strong>Pincode:</strong> {{.Pincode}}</p>
+                        <p class="card-text"><strong>District:</strong> {{.District}}</p>
+                        <p class="card-text"><strong>State:</strong> {{.State}}</p>
+                        <p class="card-text"><strong>Country:</strong> {{.Country}}</p>
+                        <p class="card-text"><strong>Default Address:</strong> {{.Defaultadd}}</p>
+                        {{if not .Defaultadd}}
+                        <a href="/user/setdefault/{{.Addressid}}" class="btn btn-warning">Set as Default</a>
+                        {{end}}
+                        <a href="/user/editaddresspage/{{.Addressid}}" class="btn btn-primary">Edit</a>
+                        <a href="/user/deleteaddress/{{.Addressid}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this address?');">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {{end}}
+        </div>
+        {{else}}
+        <p>No addresses found. Please add an address.</p>
+        {{end}}
+        <h2>Add New Address</h2>
+        <form action="/user/addaddress" style="width: 440px;" method="POST">
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="phoneno" name="phoneno" placeholder="Phone Number" required>
+            </div>
+            <div class="form-group form-inline">
+                <input type="text" class="form-control" id="houseno" name="houseno" placeholder="House Number" required>
+                <input type="text" class="form-control ml-4" id="area" name="area" placeholder="Area" required>
+            </div>
+            <input type="text" class="form-control" id="landmark" name="landmark" placeholder="Landmark" required>
+            <div class="form-group">
+            </div>
+            <div class="form-group form-inline">
+                <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
+                <input type="text" class="form-control  ml-4" id="pincode" name="pincode" placeholder="Pincode" required>
+            </div>
+            <div class="form-group form-inline">
+                <input type="text" class="form-control" id="district" name="district" placeholder="District" required>
+                <input type="text" class="form-control  ml-4" id="state" name="state" placeholder="State" required>
+                <input type="text" class="form-control mt-3" id="country" name="country" placeholder="Country" required>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Add Address</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
