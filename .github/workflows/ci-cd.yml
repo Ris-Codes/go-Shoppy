@@ -56,6 +56,9 @@ jobs:
     - name: Pull Docker image
       run: docker pull riscodes/go-shoppy:latest
 
+    - name: Fix permissions
+      run: sudo chmod -R 777 /home/ubuntu/actions-runner/_work/go-Shoppy/go-Shoppy/tmp
+
     - name: Create .env file
       run: |
         echo "PORT=${{ secrets.PORT }}" >> .env
