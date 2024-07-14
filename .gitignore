@@ -3,9 +3,6 @@
 *_test.go
 *.test
 
-# tmp files
-tmp/
-
 # Config files
 *.env
 

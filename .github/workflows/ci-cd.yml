@@ -57,9 +57,7 @@ jobs:
       run: docker pull riscodes/go-shoppy:latest
 
     - name: Fix permissions
-      run: |
-        mkdir -p /home/ubuntu/actions-runner/_work/go-Shoppy/go-Shoppy/tmp
-        sudo chmod -R 777 /home/ubuntu/actions-runner/_work/go-Shoppy/go-Shoppy/tmp
+      run: sudo chmod -R 777 /home/ubuntu/actions-runner/_work/go-Shoppy/go-Shoppy/tmp
 
     - name: Create .env file
       run: |
