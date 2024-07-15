@@ -1,7 +1,10 @@
 package controllers
 
 import (
+	"image"
+	"image/jpeg"
 	"net/http"
+	"os"
 	"path/filepath"
 	"strconv"
 
@@ -9,6 +12,7 @@ import (
 	"github.com/Ris-Codes/go-Shoppy/models"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/nfnt/resize"
 )
 
 // >>>>>>>>>>>>>> View products <<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -131,13 +135,46 @@ func AddProduct(c *gin.Context) {
 		})
 		return
 	}
+
+	// Open the uploaded file
+	file, err := imagePath.Open()
+	if err != nil {
+		c.JSON(500, gin.H{
+			"Error": "Failed to open image",
+		})
+		return
+	}
+	defer file.Close()
+
+	// Decode the image
+	img, _, err := image.Decode(file)
+	if err != nil {
+		c.JSON(500, gin.H{
+			"Error": "Failed to decode image",
+		})
+		return
+	}
+
+	// Resize the image to a maximum width of 800 pixels
+	resizedImg := resize.Resize(800, 0, img, resize.Lanczos3)
+
 	extension := filepath.Ext(imagePath.Filename)
 	image := uuid.New().String() + extension
 	savePath := "./public/images/" + image
-	err = c.SaveUploadedFile(imagePath, savePath)
+	out, err := os.Create(savePath)
 	if err != nil {
 		c.JSON(500, gin.H{
 			"Error": "Failed to save image",
+		})
+		return
+	}
+	defer out.Close()
+
+	// Encode the resized image to the output file
+	err = jpeg.Encode(out, resizedImg, nil)
+	if err != nil {
+		c.JSON(500, gin.H{
+			"Error": "Failed to encode image",
 		})
 		return
 	}
